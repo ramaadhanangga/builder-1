@@ -31,11 +31,9 @@ task:
       - export KBUILD_BUILD_HOST=irisprjkt
       - mkdir -p /tmp/rom # Where to sync source
       - cd /tmp/rom
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/xdroid-CAF/xd_manifest -b eleven -g default,-device,-mips,-darwin,-notdefault
-      - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
+      - repo init -u https://github.com/xdroid-CAF/xd_manifest -b eleven
+      - repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
       - git clone --depth=1 https://github.com/ramadhannangga/msm-4.4 --single-branch -b kernel.lnx.4.4.r44-rel kernel/asus/sdm660
-      - rm -rf prebuilts/clang/host/linux-x86/clang-xRageTC
-      - git clone --depth=1 https://github.com/GengKapak/GengKapak-clang --single-branch -b 13 prebuilts/clang/host/linux-x86/clang-gengkapak
       - git clone --depth=1 https://github.com/ramadhannangga/vendor_asus --single-branch vendor/asus
       - rm -rf vendor/asus/X00TD
       - git clone --depth=1 https://github.com/ramadhannangga/device_asus_sdm660-common --single-branch device/asus/sdm660-common
